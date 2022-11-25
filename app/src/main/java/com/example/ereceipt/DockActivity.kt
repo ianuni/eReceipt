@@ -1,14 +1,12 @@
 package com.example.ereceipt
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 
 
-class MainActivity : AppCompatActivity() {
+class DockActivity : AppCompatActivity() {
     private lateinit var invoices: ImageButton
     private lateinit var addInvoice: ImageButton
     private lateinit var inbox: ImageButton
@@ -17,9 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_dock)
 
-        /*invoices = findViewById(R.id.invoices)
+        invoices = findViewById(R.id.invoices)
         addInvoice = findViewById(R.id.add_invoice)
         inbox = findViewById(R.id.inbox)
         profile = findViewById(R.id.profile)
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
         profile.setOnClickListener {
             onClickHandle(profileFragment, profile)
-        }*/
+        }
 
     }
 
