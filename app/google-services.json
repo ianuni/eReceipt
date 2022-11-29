@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "83145866796",
+    "project_id": "ereceipt-18672",
+    "storage_bucket": "ereceipt-18672.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83145866796:android:1e148be7dcfcfef2439b89",
+        "android_client_info": {
+          "package_name": "com.example.ereceipt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83145866796-gcn9t6ahmojbatdh4obdqpaqveu091mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3T_JxfnrGv6kP2rJu-psROY6xOIBypjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83145866796-gcn9t6ahmojbatdh4obdqpaqveu091mf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
