@@ -42,6 +42,9 @@ class DockActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        return
+    }
 
     private fun colorIcon (btn: ImageButton, color : Int) {
         btn.background.setTint(resources.getColor(color))

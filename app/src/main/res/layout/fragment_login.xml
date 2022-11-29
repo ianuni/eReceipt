@@ -124,6 +124,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="password"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintEnd_toEndOf="@+id/menu"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
