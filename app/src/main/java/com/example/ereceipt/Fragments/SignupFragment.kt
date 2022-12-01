@@ -1,26 +1,29 @@
-package com.example.ereceipt
+package com.example.ereceipt.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.ereceipt.databinding.FragmentLandingBinding
+import com.example.ereceipt.DockActivity
+import com.example.ereceipt.FirebaseViewModel
+import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 
 class SignupFragment : Fragment(R.layout.fragment_signup) {
     private lateinit var binding: FragmentSignupBinding
-    private lateinit var firebaseAuth : FirebaseAuth
+    private val viewModel: FirebaseViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        firebaseAuth= Firebase.auth
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,13 +50,20 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
     }
 
     private fun checkPasswords(password1 : String, password2 : String){
-        if(password1 ==password2) {
+        if(password1 != password2) {
             throw Exception("Passwords do not match")
         }
     }
 
     private fun signUp(email: String, password: String){
-        activity?.let {
+        lifecycleScope.launch{
+            if (viewModel.myFirebase.value?.signUp(email, password) == true){
+                Log.e("a", "user created")
+            } else {
+                Log.e("a", "user already exists")
+            }
+        }
+        /*activity?.let {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(it) { task ->
                     if (task.isSuccessful){
@@ -63,6 +73,6 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                         Log.e("a", task.exception.toString())
                     }
                 }
-        }
+        }*/
     }
 }
