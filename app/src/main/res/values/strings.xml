@@ -10,5 +10,6 @@
     <string name="email_hint">jhonsmith@domain.com</string>
     <string name="welcome">Welcome to eReceipt</string>
     <string name="next">next</string>
+    <string name="back">back</string>
 
 </resources>

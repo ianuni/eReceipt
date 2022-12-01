@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.example.ereceipt.databinding.FragmentLandingBinding
 import com.example.ereceipt.databinding.FragmentSignupBinding
@@ -17,10 +18,18 @@ import com.google.firebase.ktx.Firebase
 class SignupFragment : Fragment(R.layout.fragment_signup) {
     private lateinit var binding: FragmentSignupBinding
     private lateinit var firebaseAuth : FirebaseAuth
+    private  var companyNif : String? =""
+    private var companyName : String? =""
+    private var companyPhone : String?=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth= Firebase.auth
+        childFragmentManager.setFragmentResultListener("companyKey", this){
+            key, bundle ->
+
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,8 +38,11 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
         binding.toLogIn.setOnClickListener {
             findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
         }
-
         binding.signUpButton.setOnClickListener {
+            Log.e("a", companyNif.toString())
+        }
+
+        /*binding.signUpButton.setOnClickListener {
             val password1 = binding.passwordInput.text.toString()
             val password2 = binding.confirmPasswordInput.text.toString()
             val email = binding.emailInput.text.toString()
@@ -42,7 +54,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                 Log.e("a", "aa")
             }
 
-        }
+        }*/
 
     }
 
@@ -65,4 +77,5 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
                 }
         }
     }
+
 }

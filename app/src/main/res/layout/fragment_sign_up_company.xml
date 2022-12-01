@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/nif_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NIF"
+        />
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="company name"
+        />
+    <EditText
+        android:id="@+id/phone_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="phone number"
+        android:inputType="phone"
+        />
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/button"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:layout_gravity="end"/>
+
+</LinearLayout>

@@ -30,7 +30,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/button"
-        android:text="@string/next"
+        android:text="@string/sign_up"
         android:textColor="@color/white"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -108,40 +108,18 @@
         app:layout_constraintEnd_toStartOf="@id/to_sign_up"
         />
 
-    <EditText
-        android:id="@+id/email_input"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/sign_up_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="yourmail@mail.com"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintEnd_toEndOf="@+id/menu"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintTop_toTopOf="@+id/menu"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintVertical_bias="0.35"/>
-    <EditText
-        android:id="@+id/password_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/menu"
-        app:layout_constraintEnd_toEndOf="@+id/menu"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-        app:layout_constraintTop_toTopOf="@+id/menu"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintVertical_bias="0.45"/>
-    <EditText
-        android:id="@+id/confirm_password_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="confirm password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/menu"
-        app:layout_constraintEnd_toEndOf="@+id/menu"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-        app:layout_constraintTop_toTopOf="@+id/menu"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintVertical_bias="0.55"/>
+        app:layout_constraintVertical_bias="0.45"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/sign_up_navigation_graph"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

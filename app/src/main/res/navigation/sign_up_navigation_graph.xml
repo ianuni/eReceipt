@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sign_up_navigation_graph"
+    app:startDestination="@id/companyFragment">
+
+    <fragment
+        android:id="@+id/companyFragment"
+        android:name="com.example.ereceipt.CompanyFragment"
+        android:label="CompanyFragment" >
+        <action
+            android:id="@+id/action_companyFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.ereceipt.AddressFragment"
+        android:label="AddressFragment" >
+        <action
+            android:id="@+id/action_addressFragment_to_credentialsFragment"
+            app:destination="@id/credentialsFragment" />
+        <action
+            android:id="@+id/action_addressFragment_to_companyFragment"
+            app:destination="@id/companyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/credentialsFragment"
+        android:name="com.example.ereceipt.CredentialsFragment"
+        android:label="CredentialsFragment" >
+        <action
+            android:id="@+id/action_credentialsFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+</navigation>
