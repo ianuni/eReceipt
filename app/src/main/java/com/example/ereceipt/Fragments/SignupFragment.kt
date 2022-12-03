@@ -10,9 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ereceipt.DockActivity
 import com.example.ereceipt.FirebaseViewModel
+import com.example.ereceipt.Model.Company
 import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentSignupBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
@@ -57,22 +59,12 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
 
     private fun signUp(email: String, password: String){
         lifecycleScope.launch{
-            if (viewModel.myFirebase.value?.signUp(email, password) == true){
+            val user: FirebaseUser? = viewModel.myFirebase.value?.signUp(email, password)
+            if (user != null && (viewModel.myFirebase.value?.createCompany(user, Company("", "", "", "", email, "", "", "")) == true)){
                 Log.e("a", "user created")
             } else {
                 Log.e("a", "user already exists")
             }
         }
-        /*activity?.let {
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(it) { task ->
-                    if (task.isSuccessful){
-                        Log.e("a", "cuenta creada")
-                    }
-                    else{
-                        Log.e("a", task.exception.toString())
-                    }
-                }
-        }*/
     }
 }

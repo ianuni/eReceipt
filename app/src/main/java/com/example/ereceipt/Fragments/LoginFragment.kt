@@ -10,8 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ereceipt.DockActivity
 import com.example.ereceipt.FirebaseViewModel
+import com.example.ereceipt.Model.Company
 import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 
 
@@ -31,7 +33,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.loginButton.setOnClickListener {
-            Log.e("ATG", "Llegó aqui")
             signIn(binding.emailInput.text.toString(), binding.passwordInput.text.toString())
         }
     }
@@ -39,26 +40,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun signIn(email: String, password: String) {
         lifecycleScope.launch{
             if (viewModel.myFirebase.value?.signIn(email, password) == true){
-                val intent = Intent(activity, DockActivity::class.java)
-                startActivity(intent)
-            } else {
-                Log.e("a", "invalid email or password")
-            }
+                val company: Company? = viewModel.myFirebase.value?.getCompany()
+                if (company != null) {
+                    val intent = Intent(activity, DockActivity::class.java)
+                    startActivity(intent)
+                } else{
+                    viewModel.myFirebase.value?.logOut()
+                    Log.e("a", "couldnt load company")
+                }
+            } else Log.e("a", "invalid email or password")
         }
     }
-    /*private fun signIn(email: String, password: String){
-        activity?.let {
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(it) { task ->
-                    if (task.isSuccessful){
-                        Log.e("a","success")
-                        val intent = Intent(activity, DockActivity::class.java)
-                        startActivity(intent)
-                    }
-                    else {
-                        Log.e("a", "invalid email or password")
-                    }
-                }
-        }
-    }*/
 }
