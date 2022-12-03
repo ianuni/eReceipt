@@ -59,6 +59,7 @@ class FirebaseImplementation constructor(
         return false
     }
 
+
     override suspend fun createCompany(user: FirebaseUser, company: Company) : Boolean{
         return try{
             var res = false
@@ -87,7 +88,7 @@ class FirebaseImplementation constructor(
                 }
                 .await()
             company
-        } catch (e: Exception){
+        } catch (e: Exception) {
             null
         }
     }
