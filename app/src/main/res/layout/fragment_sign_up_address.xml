@@ -32,14 +32,7 @@
         android:layout_height="wrap_content"
         android:hint="Country"
         />
-    <Button
-        android:id="@+id/next_button"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:background="@drawable/button"
-        android:text="@string/next"
-        android:textColor="@color/white"
-        android:layout_gravity="end"/>
+
 
 
 </LinearLayout>

@@ -3,7 +3,13 @@ package com.example.ereceipt
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.example.ereceipt.Firebase.FirebaseImplementation
+import com.example.ereceipt.Fragments.AddInvoiceFragment
+import com.example.ereceipt.Fragments.InboxFragment
+import com.example.ereceipt.Fragments.InvoicesFragment
+import com.example.ereceipt.Fragments.ProfileFragment
 
 
 class DockActivity : AppCompatActivity() {
@@ -12,10 +18,13 @@ class DockActivity : AppCompatActivity() {
     private lateinit var inbox: ImageButton
     private lateinit var profile: ImageButton
     private lateinit var currentBtn :ImageButton
+    private val fireViewModel : FirebaseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dock)
+
+        fireViewModel.setdata(FirebaseImplementation())
 
         invoices = findViewById(R.id.invoices)
         addInvoice = findViewById(R.id.add_invoice)
@@ -66,6 +75,4 @@ class DockActivity : AppCompatActivity() {
             updateDock(nextBtn)
         }
     }
-
-
 }

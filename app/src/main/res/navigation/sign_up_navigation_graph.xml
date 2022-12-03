@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/companyFragment"
-        android:name="com.example.ereceipt.CompanyFragment"
+        android:name="com.example.ereceipt.Fragments.CompanyFragment"
         android:label="CompanyFragment" >
         <action
             android:id="@+id/action_companyFragment_to_addressFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
-        android:name="com.example.ereceipt.AddressFragment"
+        android:name="com.example.ereceipt.Fragments.AddressFragment"
         android:label="AddressFragment" >
         <action
             android:id="@+id/action_addressFragment_to_credentialsFragment"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/credentialsFragment"
-        android:name="com.example.ereceipt.CredentialsFragment"
+        android:name="com.example.ereceipt.Fragments.CredentialsFragment"
         android:label="CredentialsFragment" >
         <action
             android:id="@+id/action_credentialsFragment_to_addressFragment"

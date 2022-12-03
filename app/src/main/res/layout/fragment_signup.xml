@@ -32,6 +32,7 @@
         android:background="@drawable/button"
         android:text="@string/sign_up"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
@@ -112,14 +113,32 @@
         android:id="@+id/sign_up_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintEnd_toEndOf="@+id/menu"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
         app:layout_constraintTop_toTopOf="@+id/menu"
         app:layout_constraintWidth_percent="0.8"
         app:layout_constraintVertical_bias="0.45"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/sign_up_navigation_graph"/>
+        />
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/button"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_container"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_container"
+        />
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/button"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_container"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_container"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
