@@ -93,6 +93,8 @@ class FirebaseImplementation constructor(
         }
     }
 
+
+
     fun getFireAuth() {
         Log.e("awd", this.firebaseAuth.app.toString())
     }

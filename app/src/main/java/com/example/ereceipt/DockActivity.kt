@@ -20,6 +20,7 @@ class DockActivity : AppCompatActivity() {
     private lateinit var currentBtn :ImageButton
     private val fireViewModel : FirebaseViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dock)

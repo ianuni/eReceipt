@@ -69,7 +69,6 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
         }
 
         binding.signUpButton.setOnClickListener {
-            // TODO: Include signup logic below here
             signUp()
         }
 
@@ -103,6 +102,7 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
             val user: FirebaseUser? = viewModel.myFirebase.value?.signUp(company.email, password)
             if (user != null && (viewModel.myFirebase.value?.createCompany(user, company) == true)
             ) {
+                findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
                 Log.e("a", "user created")
             } else Log.e("a", "user already exists")
         }
