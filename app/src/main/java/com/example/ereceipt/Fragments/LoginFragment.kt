@@ -9,11 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ereceipt.DockActivity
-import com.example.ereceipt.FirebaseViewModel
+import com.example.ereceipt.ViewModels.FirebaseViewModel
 import com.example.ereceipt.Model.Company
 import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentLoginBinding
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 
 
@@ -40,9 +39,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun signIn(email: String, password: String) {
         lifecycleScope.launch{
             if (viewModel.myFirebase.value?.signIn(email, password) == true){
+                val intent = Intent(activity, DockActivity::class.java)
                 val company: Company? = viewModel.myFirebase.value?.getCompany()
                 if (company != null) {
-                    val intent = Intent(activity, DockActivity::class.java)
                     startActivity(intent)
                 } else{
                     viewModel.myFirebase.value?.logOut()

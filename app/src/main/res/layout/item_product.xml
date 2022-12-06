@@ -4,12 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/first_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05"/>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/second_guide"
@@ -25,12 +20,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/fourth_guide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95"/>
+
 
     <TextView
         android:id="@+id/product_name"
@@ -38,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="product"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/first_guide"
+        app:layout_constraintStart_toStartOf="parent"
         />
     <TextView
         android:id="@+id/product_amount"
@@ -65,7 +55,7 @@
         android:background="@drawable/delete_left_solid"
         android:backgroundTint="@color/light_gray"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/fourth_guide"
+        app:layout_constraintEnd_toEndOf="parent"
         />
 
     <TextView

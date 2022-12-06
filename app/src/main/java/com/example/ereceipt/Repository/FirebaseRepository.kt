@@ -1,6 +1,7 @@
 package com.example.ereceipt.Repository
 
 import com.example.ereceipt.Model.Company
+import com.example.ereceipt.Model.Invoice
 import com.google.firebase.auth.FirebaseUser
 
 interface FirebaseRepository {
@@ -14,6 +15,12 @@ interface FirebaseRepository {
     suspend fun createCompany(user: FirebaseUser, company: Company) : Boolean
 
     suspend fun getCompany(): Company?
+
+    //suspend fun getCheckedInvoices(nif: String): MutableCollection<Invoice>
+
+    suspend fun getInvoices(nif: String): Collection<Invoice>
+
+    suspend fun createInvoice(invoice: Invoice): Boolean
 
 }
 

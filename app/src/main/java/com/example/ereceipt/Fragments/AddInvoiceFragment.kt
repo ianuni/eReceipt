@@ -6,11 +6,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ereceipt.Model.Product
 import com.example.ereceipt.R
+import com.example.ereceipt.ViewModels.CompanyViewModel
 import com.example.ereceipt.adapter.ProductAdapter
 import com.example.ereceipt.databinding.FragmentAddInvoiceBinding
 
@@ -19,6 +22,8 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
     private lateinit var binding :  FragmentAddInvoiceBinding
     private var products = ArrayList<Product>()
     private lateinit var  adapter : ProductAdapter
+    private val companyViewModel : CompanyViewModel by activityViewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,12 +43,14 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
                 val amount = 1.0
                 val product = Product(name, price, amount)
                 products.add(product)
+
                 adapter.notifyItemInserted(products.size)
                 dialog.dismiss()
             }
         }
 
         binding.createBtn.setOnClickListener {
+            //postinvoice
 
         }
 
