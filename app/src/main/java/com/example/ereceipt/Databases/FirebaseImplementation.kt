@@ -1,4 +1,4 @@
-package com.example.ereceipt.Firebase
+package com.example.ereceipt.Databases
 
 import android.util.Log
 import com.example.ereceipt.Model.Company
@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.tasks.await
@@ -16,7 +15,8 @@ import kotlinx.coroutines.tasks.await
 class FirebaseImplementation constructor(
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance(),
     private val firebaseFireStore: FirebaseFirestore = FirebaseFirestore.getInstance(),
-    private val invoiceDB: CollectionReference = firebaseFireStore.collection("invoices")
+    private val invoiceDB: CollectionReference = firebaseFireStore.collection("invoices"),
+    private val companyDB: CollectionReference = firebaseFireStore.collection("companies")
 
 ): FirebaseRepository {
 
@@ -68,7 +68,7 @@ class FirebaseImplementation constructor(
     override suspend fun createCompany(user: FirebaseUser, company: Company) : Boolean{
         return try{
             var res = false
-            firebaseFireStore.collection("companies").document(user.uid).set(company)
+            companyDB.document(user.uid).set(company)
                 .addOnCompleteListener{ task ->
                     res = task.isSuccessful
                     if (res){
@@ -87,9 +87,23 @@ class FirebaseImplementation constructor(
     override suspend fun getCompany(): Company? {
         return try {
             var company: Company? = null
-            firebaseFireStore.collection("companies").document(firebaseAuth.currentUser!!.uid)
-                .get().addOnSuccessListener { documentSnapshot ->
-                    company = documentSnapshot.toObject<Company>()
+            companyDB.document(firebaseAuth.currentUser!!.uid)
+                .get().addOnSuccessListener { document ->
+                    company = document.toObject<Company>()
+                }
+                .await()
+            company
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    override suspend fun getCompany(nif: String): Company? {
+        return try {
+            var company: Company? = null
+            companyDB.whereEqualTo("nif", nif)
+                .get().addOnSuccessListener { documents ->
+                    company = documents.toObjects<Company>()
                 }
                 .await()
             company

@@ -18,12 +18,9 @@ class CompanyViewModel: ViewModel() {
     fun setInvoices(invoices: Collection<Invoice>){
         checkedInvoices.value = mutableListOf()
         nonCheckedInvoices.value = mutableListOf()
-        updateInvoices(invoices)
-    }
-
-    fun updateInvoices(invoices: Collection<Invoice>){
         for (invoice in invoices){
-            if (!invoice.verification && invoice.buyerNif.equals(company.value!!.nif)) {
+            //if (!invoice.verification && invoice.buyerNif.equals(company.value!!.nif)) {
+            if (!invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)) {
                 nonCheckedInvoices.value!!.add(invoice)
                 Log.e("X", "nonChecked: "+ invoice.toString())
             } else {
@@ -35,7 +32,8 @@ class CompanyViewModel: ViewModel() {
 
     fun updateInvoices(){
         for (invoice in nonCheckedInvoices.value!!){
-            if (invoice.verification && invoice.buyerNif.equals(company.value!!.nif)){
+            if (invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)){
+            //if (invoice.verification && invoice.buyerNif.equals(company.value!!.nif)){
                 checkedInvoices.value!!.add(invoice)
                 nonCheckedInvoices.value!!.remove(invoice)
             }

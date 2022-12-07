@@ -2,7 +2,7 @@ package com.example.ereceipt.ViewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ereceipt.Firebase.FirebaseImplementation
+import com.example.ereceipt.Databases.FirebaseImplementation
 
 class FirebaseViewModel : ViewModel() {
     val myFirebase = MutableLiveData<FirebaseImplementation>()

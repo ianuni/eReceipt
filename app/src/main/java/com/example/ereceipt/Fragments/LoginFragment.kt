@@ -44,8 +44,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 if (company != null) {
                     startActivity(intent)
                 } else{
-                    viewModel.myFirebase.value?.logOut()
-                    Log.e("a", "couldnt load company")
+                    /*for(i in 1..10){
+                        viewModel.myFirebase.value?.logOut()
+                        Log.e("a", "couldnt load company")
+                        signIn(email, password)
+                    }*/
+                    Log.e("end", "couldnt load company")
                 }
             } else Log.e("a", "invalid email or password")
         }
