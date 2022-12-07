@@ -91,6 +91,7 @@ class DockActivity : AppCompatActivity() {
         fireViewModel.setdata(FirebaseImplementation())
         lifecycleScope.launch{
             val company: Company? = fireViewModel.myFirebase.value?.getCompany()
+            Log.e("a", company?.city.toString())
             if (company != null) {
                 companyViewModel.setCompany(company)
                 val invoices: Collection<Invoice>? = fireViewModel.myFirebase.value?.getInvoices(company.nif)

@@ -7,10 +7,12 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.example.ereceipt.Firebase.FirebaseImplementation
 import com.example.ereceipt.ViewModels.FirebaseViewModel
+import com.example.ereceipt.ViewModels.SignUpCompanyViewModel
 
 
 class MainActivity : AppCompatActivity() {
     private val fireViewModel : FirebaseViewModel by viewModels()
+    private val signUpCompany : SignUpCompanyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_EReceipt)

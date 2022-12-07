@@ -108,29 +108,56 @@
         app:layout_constraintEnd_toEndOf="@id/to_log_in"
         />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_container"
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        app:helperTextTextColor="@color/error"
+        app:layout_constraintStart_toStartOf="@+id/menu"
+        app:layout_constraintEnd_toEndOf="@+id/menu"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
+        app:layout_constraintTop_toTopOf="@+id/menu"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintVertical_bias="0.35">
+
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email_input"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:lines="1"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_container"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="yourmail@mail.com"
+        app:helperTextTextColor="@color/error"
+        android:paddingBottom="10dp"
+        app:passwordToggleEnabled="true"
         app:layout_constraintStart_toStartOf="@+id/menu"
         app:layout_constraintEnd_toEndOf="@+id/menu"
         app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-        app:layout_constraintTop_toTopOf="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@+id/email_container"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintVertical_bias="0.35"/>
-    <EditText
-        android:id="@+id/password_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/menu"
-        app:layout_constraintEnd_toEndOf="@+id/menu"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-        app:layout_constraintTop_toTopOf="@+id/menu"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintVertical_bias="0.45"/>
+        app:layout_constraintVertical_bias="0">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
