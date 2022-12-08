@@ -2,15 +2,14 @@ package com.example.ereceipt.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ereceipt.DockActivity
-import com.example.ereceipt.ViewModels.FirebaseViewModel
-import com.example.ereceipt.Model.Company
+import com.example.ereceipt.ViewModels.DatabasesViewModel
 import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
@@ -18,11 +17,7 @@ import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
-    private val viewModel: FirebaseViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel: DatabasesViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,18 +35,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         lifecycleScope.launch{
             if (viewModel.myFirebase.value?.signIn(email, password) == true){
                 val intent = Intent(activity, DockActivity::class.java)
+                startActivity(intent)
+                /*
                 val company: Company? = viewModel.myFirebase.value?.getCompany()
+                Log.e("a", company?.city.toString())
                 if (company != null) {
                     startActivity(intent)
                 } else{
-                    /*for(i in 1..10){
-                        viewModel.myFirebase.value?.logOut()
-                        Log.e("a", "couldnt load company")
-                        signIn(email, password)
-                    }*/
                     Log.e("end", "couldnt load company")
-                }
-            } else Log.e("a", "invalid email or password")
+                }*/
+            } else {
+                Toast.makeText(activity, "Email or password is incorrect", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

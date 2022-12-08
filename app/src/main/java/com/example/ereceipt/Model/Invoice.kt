@@ -5,9 +5,9 @@ import java.util.Date
 /*data class Invoice(
     var buyerNif: String = "",
     var buyerView: Boolean = true,
-    var creationDate: Date = Date(),
-    var productList: List<Product> = listOf(),
-    var sellerNif: String = "",
+    val creationDate: Date = Date(),
+    val productList: List<Product> = listOf(),
+    val sellerNif: String = "",
     var sellerView: Boolean = true,
     var taxesPercent: Double = 0.0,
     var total: Double = 0.0,
@@ -88,7 +88,7 @@ class Invoice {
     }
 
     fun setBuyerNif(buyerNif: String){
-        this.buyerNif
+        this.buyerNif = buyerNif
     }
 
     fun setSellerView(sellerView: Boolean){

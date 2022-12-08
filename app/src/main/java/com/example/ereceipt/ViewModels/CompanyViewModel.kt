@@ -8,24 +8,25 @@ import com.example.ereceipt.Model.Invoice
 
 class CompanyViewModel: ViewModel() {
     val company = MutableLiveData<Company>()
-    val checkedInvoices = MutableLiveData<MutableList<Invoice>>()
+    val invoices = MutableLiveData<MutableList<Invoice>>()
     val nonCheckedInvoices = MutableLiveData<MutableList<Invoice>>()
 
     fun setCompany(company: Company){
         this.company.value = company
     }
 
-    fun setInvoices(invoices: Collection<Invoice>){
-        checkedInvoices.value = mutableListOf()
+    fun setInvoices(invoicesList: Collection<Invoice>){
+        invoices.value = mutableListOf()
         nonCheckedInvoices.value = mutableListOf()
-        for (invoice in invoices){
+        for (invoice in invoicesList){
             //if (!invoice.verification && invoice.buyerNif.equals(company.value!!.nif)) {
+            //Log.e("X", "Invoice =  Verification: "+ invoice.getVerification().toString() + " BuyerNIF: " + invoice.getBuyerNif().toString())
             if (!invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)) {
                 nonCheckedInvoices.value!!.add(invoice)
-                Log.e("X", "nonChecked: "+ invoice.toString())
+                //Log.e("X", "nonChecked: "+ invoice.toString())
             } else {
-                checkedInvoices.value!!.add(invoice)
-                Log.e("Y", "checked: "+ invoice.toString())
+                invoices.value!!.add(invoice)
+                //Log.e("Y", "checked: "+ invoice.toString())
             }
         }
     }
@@ -34,7 +35,7 @@ class CompanyViewModel: ViewModel() {
         for (invoice in nonCheckedInvoices.value!!){
             if (invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)){
             //if (invoice.verification && invoice.buyerNif.equals(company.value!!.nif)){
-                checkedInvoices.value!!.add(invoice)
+                invoices.value!!.add(invoice)
                 nonCheckedInvoices.value!!.remove(invoice)
             }
         }

@@ -13,11 +13,10 @@ import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.Model.Product
 import com.example.ereceipt.R
 import com.example.ereceipt.ViewModels.CompanyViewModel
-import com.example.ereceipt.ViewModels.FirebaseViewModel
+import com.example.ereceipt.ViewModels.DatabasesViewModel
 import com.example.ereceipt.adapter.ProductAdapter
 import com.example.ereceipt.databinding.FragmentAddInvoiceBinding
 import kotlinx.coroutines.launch
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -26,7 +25,7 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
     private var products = ArrayList<Product>()
     private lateinit var  adapter : ProductAdapter
     private val companyViewModel : CompanyViewModel by activityViewModels()
-    private val firebaseViewModel: FirebaseViewModel by activityViewModels()
+    private val databasesViewModel: DatabasesViewModel by activityViewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
             creationView.findViewById<Button>(R.id.add_item).setOnClickListener {
                 val name = creationView.findViewById<EditText>(R.id.product_name).text.toString()
                 val price = creationView.findViewById<EditText>(R.id.product_price).text.toString().toDouble()
-                val amount = creationView.findViewById<EditText>(R.id.product_price).text.toString().toInt()
+                val amount = creationView.findViewById<EditText>(R.id.product_amount).text.toString().toInt()
                 val product = Product(name, price, amount)
                 products.add(product)
 
@@ -54,10 +53,12 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
         }
 
         binding.createBtn.setOnClickListener {
-            val invoice = Invoice(binding.buyerNif.toString(), companyViewModel.company.value!!.nif, products, binding.buyerNif.toString().toDouble())
+            //val invoice = Invoice(binding.buyerNif.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.toString().toDouble())
+            val invoice = Invoice(binding.buyerNif.text.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
+
             //val invoice = Invoice("12",true, Date(), products, companyViewModel.company.value!!.nif, true, 7.0, calculateTotal(products),false, Date())
             lifecycleScope.launch{
-                firebaseViewModel.myFirebase.value?.createInvoice(invoice)
+                databasesViewModel.myFirebase.value?.createInvoice(invoice)
             }
         }
 

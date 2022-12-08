@@ -18,7 +18,7 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = products[position]
-        holder.render(item, onClickDelete)
+        holder.render(item, onClickDelete )
     }
 
     override fun getItemCount(): Int {

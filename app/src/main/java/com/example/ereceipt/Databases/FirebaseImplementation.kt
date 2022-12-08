@@ -103,7 +103,14 @@ class FirebaseImplementation constructor(
             var company: Company? = null
             companyDB.whereEqualTo("nif", nif)
                 .get().addOnSuccessListener { documents ->
-                    company = documents.toObjects<Company>()
+                    if (documents.size() == 1){
+                        company = documents.first().toObject<Company>()
+                    } else if (documents.size() == 0){
+                        Log.e("ERR", "No existe compañia con NIF: $nif")
+                    }
+                    else{
+                        Log.e("ERR", "existe más de una compañía con el mismo nif en la base de datos: Nombre= " + documents.first().toObject<Company>().name + ", NIF= " + documents.first().toObject<Company>().nif)
+                    }
                 }
                 .await()
             company

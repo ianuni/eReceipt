@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.ereceipt.Databases.FirebaseImplementation
+import com.example.ereceipt.Databases.SQLite
 import com.example.ereceipt.Fragments.AddInvoiceFragment
 import com.example.ereceipt.Fragments.InboxFragment
 import com.example.ereceipt.Fragments.InvoicesFragment
@@ -15,7 +16,7 @@ import com.example.ereceipt.Fragments.ProfileFragment
 import com.example.ereceipt.Model.Company
 import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.ViewModels.CompanyViewModel
-import com.example.ereceipt.ViewModels.FirebaseViewModel
+import com.example.ereceipt.ViewModels.DatabasesViewModel
 import kotlinx.coroutines.launch
 
 
@@ -25,7 +26,7 @@ class DockActivity : AppCompatActivity() {
     private lateinit var inbox: ImageButton
     private lateinit var profile: ImageButton
     private lateinit var currentBtn :ImageButton
-    private val fireViewModel : FirebaseViewModel by viewModels()
+    private val dbViewModel : DatabasesViewModel by viewModels()
     private val companyViewModel : CompanyViewModel by viewModels()
 
 
@@ -34,6 +35,7 @@ class DockActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dock)
 
         loadDataOnViewModels()
+        //pruebaDB()
 
         invoices = findViewById(R.id.invoices)
         addInvoice = findViewById(R.id.add_invoice)
@@ -86,30 +88,55 @@ class DockActivity : AppCompatActivity() {
     }
 
     private fun loadDataOnViewModels(){
-        fireViewModel.setdata(FirebaseImplementation())
-        lifecycleScope.launch{
-            val company: Company? = fireViewModel.myFirebase.value?.getCompany()
-            if (company != null) {
-                companyViewModel.setCompany(company)
-                val invoices: Collection<Invoice>? = fireViewModel.myFirebase.value?.getInvoices(company.nif)
-                Log.e("adw", "llego aqui")
-                if (invoices != null){
-                    Log.e("adw", invoices.toString())
-                    companyViewModel.setInvoices(invoices)
-                }else{
-                    //¿Qué pasaría??????????
-                    Log.e("a", "couldnt load invoices")
+        dbViewModel.setFirebase(FirebaseImplementation())
+        dbViewModel.setSQLite(SQLite(this))
+        var company: Company? = null
+        lifecycleScope.launch {
+            for (i in 1..10){
+                company = dbViewModel.myFirebase.value?.getCompany()
+                if (company != null) {
+                    Log.e("INTENTOS", "el número de intentos para cargar la compañia fueron: " + i.toString())
+                    break
                 }
-            } else{
-                //fireViewModel.myFirebase.value?.logOut()
-                //¿Qué pasaría??????????
-                Log.e("a", "couldnt load company")
             }
-            //fireViewModel.myFirebase.value?.createInvoice(Invoice("12345678S",true, Date(), mapOf("atun" to 2.33f, "millo" to 1f, "mahonesa" to 23.3f), "4", true, 7f, 50.1f,false, Date()))
-            //fireViewModel.myFirebase.value?.createInvoice(Invoice("12345678S",true, Date(), mapOf("papas" to 2.33f), "4", true, 7f, 50.1f,true, Date()))
-            //fireViewModel.myFirebase.value?.createInvoice(Invoice("12",true, Date(), mapOf("cangrejo" to 2.33f), "12345678S", true, 7f, 50.1f,false, Date()))
-            //fireViewModel.myFirebase.value?.createInvoice(Invoice("12",true, Date(), listOf(Product("chistorra", 4.5, 3)), "12345678S", true, 7.0, 50.1,true, Date()))
+            if (company != null) {
+                companyViewModel.setCompany(company!!)
+                val invoices: Collection<Invoice>? = dbViewModel.myFirebase.value?.getInvoices(company!!.nif)
+                if (invoices != null) {
+                    companyViewModel.setInvoices(invoices)
+                    updateLocalDatabase()
+                } else Log.e("a", "couldnt load invoices")
+            } else Log.e("a", "couldnt load company")
+        }
+        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12345678S",true, Date(), mapOf("atun" to 2.33f, "millo" to 1f, "mahonesa" to 23.3f), "4", true, 7f, 50.1f,false, Date()))
+        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12345678S",true, Date(), mapOf("papas" to 2.33f), "4", true, 7f, 50.1f,true, Date()))
+        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12",true, Date(), mapOf("cangrejo" to 2.33f), "12345678S", true, 7f, 50.1f,false, Date()))
+        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12",true, Date(), listOf(Product("chistorra", 4.5, 3)), "12345678S", true, 7.0, 50.1,true, Date()))
+    }
+
+    private fun updateLocalDatabase(){
+        lifecycleScope.launch {
+            for (invoice in companyViewModel.nonCheckedInvoices.value!!) { //Si te han emitido cualquier factuta
+                var company = dbViewModel.myFirebase.value?.getCompany(invoice.getSellerNif())
+                if (company != null) dbViewModel.mySQLite.value?.addCompany(company)
+            }
+            for (invoice in companyViewModel.invoices.value!!) {
+                if (invoice.getSellerNif().equals(companyViewModel.company.value?.nif) && invoice.getVerification()) { //Si eres vendedor y está verificada la factura
+                    var company = dbViewModel.myFirebase.value?.getCompany(invoice.getBuyerNif())
+                    if (company != null) dbViewModel.mySQLite.value?.addCompany(company)
+                }
+            }
+            Log.e("SQLite", "Compañias en la base de datos local: " + dbViewModel.mySQLite.value?.getCompanies().toString())
 
         }
+    }
+    private fun pruebaDB(){
+        dbViewModel.mySQLite.value?.onUpgrade(dbViewModel.mySQLite.value?.writableDatabase, 1, 1)
+        dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
+        dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
+        dbViewModel.mySQLite.value?.addCompany(Company("OTRONIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
+        Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompany("NIF").toString())
+        Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompanies().toString())
+
     }
 }
