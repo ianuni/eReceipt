@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import com.example.ereceipt.ViewModels.FirebaseViewModel
+import com.example.ereceipt.ViewModels.DatabasesViewModel
 import com.example.ereceipt.MainActivity
 import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentProfileBinding
@@ -14,7 +14,7 @@ import com.example.ereceipt.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var binding: FragmentProfileBinding
-    private val viewModel: FirebaseViewModel by activityViewModels()
+    private val viewModel: DatabasesViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

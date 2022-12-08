@@ -2,20 +2,22 @@ package com.example.ereceipt.Fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.Model.Product
 import com.example.ereceipt.R
 import com.example.ereceipt.ViewModels.CompanyViewModel
+import com.example.ereceipt.ViewModels.DatabasesViewModel
 import com.example.ereceipt.adapter.ProductAdapter
 import com.example.ereceipt.databinding.FragmentAddInvoiceBinding
+import kotlinx.coroutines.launch
+import kotlin.collections.ArrayList
 
 
 class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
@@ -23,6 +25,7 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
     private var products = ArrayList<Product>()
     private lateinit var  adapter : ProductAdapter
     private val companyViewModel : CompanyViewModel by activityViewModels()
+    private val databasesViewModel: DatabasesViewModel by activityViewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +43,7 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
             creationView.findViewById<Button>(R.id.add_item).setOnClickListener {
                 val name = creationView.findViewById<EditText>(R.id.product_name).text.toString()
                 val price = creationView.findViewById<EditText>(R.id.product_price).text.toString().toDouble()
-                val amount = 1.0
+                val amount = creationView.findViewById<EditText>(R.id.product_amount).text.toString().toInt()
                 val product = Product(name, price, amount)
                 products.add(product)
 
@@ -50,8 +53,13 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
         }
 
         binding.createBtn.setOnClickListener {
-            //postinvoice
+            //val invoice = Invoice(binding.buyerNif.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.toString().toDouble())
+            val invoice = Invoice(binding.buyerNif.text.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
 
+            //val invoice = Invoice("12",true, Date(), products, companyViewModel.company.value!!.nif, true, 7.0, calculateTotal(products),false, Date())
+            lifecycleScope.launch{
+                databasesViewModel.myFirebase.value?.createInvoice(invoice)
+            }
         }
 
     }
@@ -70,4 +78,12 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
         products.removeAt(pos)
         adapter.notifyItemRemoved(pos)
     }
+
+    /*private fun calculateTotal(productList: List<Product>): Double{
+        var total: Double = 0.0
+        for (product in productList) {
+            total += product.amount * product.price
+        }
+        return total
+    }*/
 }

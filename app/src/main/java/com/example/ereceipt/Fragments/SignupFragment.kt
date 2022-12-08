@@ -1,20 +1,12 @@
 package com.example.ereceipt.Fragments
 
 import android.os.Bundle
-import android.util.Log
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.View
 
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.ereceipt.ViewModels.FirebaseViewModel
-import com.example.ereceipt.Model.Company
 import com.example.ereceipt.R
 import com.example.ereceipt.databinding.FragmentSignupBinding
-import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.launch
 
 
 class SignupFragment : Fragment(R.layout.fragment_signup) {

@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ereceipt.Model.Company
 import com.example.ereceipt.R
-import com.example.ereceipt.ViewModels.FirebaseViewModel
+import com.example.ereceipt.ViewModels.DatabasesViewModel
 import com.example.ereceipt.ViewModels.SignUpCompanyViewModel
 import com.example.ereceipt.databinding.FragmentSignUpCredentialsBinding
 import com.google.firebase.auth.FirebaseUser
@@ -23,7 +20,7 @@ import kotlinx.coroutines.launch
 class CredentialsFragment : Fragment(R.layout.fragment_sign_up_credentials) {
     private lateinit var binding: FragmentSignUpCredentialsBinding
     private val signUpCompanyViewModel : SignUpCompanyViewModel by activityViewModels()
-    private val viewModel: FirebaseViewModel by activityViewModels()
+    private val viewModel: DatabasesViewModel by activityViewModels()
     private lateinit var company : Company
     private lateinit var password: String
     private lateinit var confirmationPassword: String

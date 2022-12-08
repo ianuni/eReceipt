@@ -16,6 +16,8 @@ interface FirebaseRepository {
 
     suspend fun getCompany(): Company?
 
+    suspend fun getCompany(nif: String): Company?
+
     //suspend fun getCheckedInvoices(nif: String): MutableCollection<Invoice>
 
     suspend fun getInvoices(nif: String): Collection<Invoice>
