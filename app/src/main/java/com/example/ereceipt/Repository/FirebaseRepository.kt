@@ -24,5 +24,7 @@ interface FirebaseRepository {
 
     suspend fun createInvoice(invoice: Invoice): Boolean
 
+    suspend fun updateNotifications(nif : String) : ArrayList<Invoice>
+
 }
 
