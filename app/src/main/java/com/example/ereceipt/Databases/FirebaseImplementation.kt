@@ -157,6 +157,16 @@ class FirebaseImplementation constructor(
         }
     }
 
+    override suspend fun updateNotifications(nif:String) : ArrayList<Invoice> {
+        val notifications = ArrayList<Invoice>()
+        invoiceDB.whereEqualTo("buyerNif", nif)
+            .whereEqualTo("verification", false).get().addOnSuccessListener { documents ->
+                notifications.addAll(documents.toObjects<Invoice>())
+            }
+            .await()
+        return notifications
+    }
+
     fun getFireAuth() {
         Log.e("awd", this.firebaseAuth.app.toString())
     }
