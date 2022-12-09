@@ -17,7 +17,9 @@ import com.example.ereceipt.Model.Company
 import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.ViewModels.CompanyViewModel
 import com.example.ereceipt.ViewModels.DatabasesViewModel
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class DockActivity : AppCompatActivity() {
@@ -34,7 +36,9 @@ class DockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dock)
 
+        //lifecycleScope.launch {loadDataOnViewModels()}
         loadDataOnViewModels()
+
         //pruebaDB()
 
         invoices = findViewById(R.id.invoices)
@@ -87,6 +91,7 @@ class DockActivity : AppCompatActivity() {
         }
     }
 
+    //private suspend fun loadDataOnViewModels(){
     private fun loadDataOnViewModels(){
         dbViewModel.setFirebase(FirebaseImplementation())
         dbViewModel.setSQLite(SQLite(this))
@@ -95,6 +100,8 @@ class DockActivity : AppCompatActivity() {
             for (i in 1..10){
                 company = dbViewModel.myFirebase.value?.getCompany()
                 if (company != null) {
+                    //companyViewModel.setCompany(company!!)
+                    //navigate(InvoicesFragment())
                     Log.e("INTENTOS", "el número de intentos para cargar la compañia fueron: " + i.toString())
                     break
                 }

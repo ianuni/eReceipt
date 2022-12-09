@@ -31,6 +31,10 @@ class CompanyViewModel: ViewModel() {
         }
     }
 
+    fun getCheckedInvoiceList(): MutableList<Invoice>? {
+        return invoices.value
+    }
+
     fun updateInvoices(){
         for (invoice in nonCheckedInvoices.value!!){
             if (invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)){
