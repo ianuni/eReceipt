@@ -44,14 +44,12 @@ class InboxFragment : Fragment(R.layout.fragment_inbox) {
         )
         binding.notificationList.adapter = adapter
         binding.notificationList.layoutManager = LinearLayoutManager(activity)
-        Log.e("a", "recyclerview created")
     }
 
     private fun declineItem(pos: Int){
         //Decline ticket
         lifecycleScope.launch{
             dbViewModel.myFirebase.value?.declineNotification(notifications[pos].getInvoiceId())
-            Log.e("a", "notification declined")
         }
         notifications.removeAt(pos)
         adapter.notifyItemRemoved(pos)
@@ -61,7 +59,6 @@ class InboxFragment : Fragment(R.layout.fragment_inbox) {
         //Accept ticket
         lifecycleScope.launch{
             dbViewModel.myFirebase.value?.acceptNotification(notifications[pos].getInvoiceId())
-            Log.e("a", "notification accepted")
         }
         notifications.removeAt(pos)
         adapter.notifyItemRemoved(pos)
@@ -74,6 +71,5 @@ class InboxFragment : Fragment(R.layout.fragment_inbox) {
                 initRecyclerView()
             }
         }
-
     }
 }

@@ -17,7 +17,6 @@ import com.example.ereceipt.Model.Company
 import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.ViewModels.CompanyViewModel
 import com.example.ereceipt.ViewModels.DatabasesViewModel
-import com.example.ereceipt.databinding.ActivityDockBinding
 import kotlinx.coroutines.launch
 
 
@@ -36,8 +35,7 @@ class DockActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dock)
         dbViewModel.setFirebase(FirebaseImplementation())
         dbViewModel.setSQLite(SQLite(this))
-        lifecycleScope.launch{loadDataOnViewModels()}
-
+        loadDataOnViewModels()
 
         invoices = findViewById(R.id.invoices)
         addInvoice = findViewById(R.id.add_invoice)
@@ -93,9 +91,9 @@ class DockActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun loadDataOnViewModels(){
-        //dbViewModel.setFirebase(FirebaseImplementation())
-        //dbViewModel.setSQLite(SQLite(this))
+    private fun loadDataOnViewModels(){
+        dbViewModel.setFirebase(FirebaseImplementation())
+        dbViewModel.setSQLite(SQLite(this))
         var company: Company? = null
         lifecycleScope.launch {
             for (i in 1..10){

@@ -184,6 +184,30 @@ class FirebaseImplementation constructor(
         companyDB.document(companyId).update(changes)
     }
 
+    override suspend fun updateInvoices(nif: String): ArrayList<Invoice> {
+        val invoices = ArrayList<Invoice>()
+        invoiceDB.whereEqualTo("sellerNif", nif)
+            .whereEqualTo("sellerView", true)
+            .get().addOnSuccessListener { documents ->
+                for ((i, document) in documents.withIndex()){
+                    invoices.add(document.toObject<Invoice>())
+                    invoices[i].setInvoiceId(document.id)
+                }
+            }
+            .await()
+        invoiceDB.whereEqualTo("buyerNif", nif)
+            .whereEqualTo("verification", true)
+            .whereEqualTo("buyerView", true)
+            .get().addOnSuccessListener { documents ->
+                for ((i, document) in documents.withIndex()){
+                    invoices.add(document.toObject<Invoice>())
+                    invoices[i].setInvoiceId(document.id)
+                }
+            }
+            .await()
+        return invoices
+    }
+
     fun getFireAuth() {
         Log.e("awd", this.firebaseAuth.app.toString())
     }

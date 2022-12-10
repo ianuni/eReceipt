@@ -34,14 +34,17 @@ class CompanyViewModel: ViewModel() {
         }
     }
 
-    /*fun updateInvoices(){
-        for (invoice in nonCheckedInvoices.value!!){
-            if (invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)){
-            //if (invoice.verification && invoice.buyerNif.equals(company.value!!.nif)){
+    fun getCheckedInvoiceList(): MutableList<Invoice>? {
+        return invoices.value
+    }
+
+    fun updateInvoices() {
+        for (invoice in nonCheckedInvoices) {
+            if (invoice.getVerification() && invoice.getBuyerNif().equals(company.value!!.nif)) {
+                //if (invoice.verification && invoice.buyerNif.equals(company.value!!.nif)){
                 invoices.value!!.add(invoice)
-                nonCheckedInvoices.value!!.remove(invoice)
+                nonCheckedInvoices.remove(invoice)
             }
         }
-    }*/
-
+    }
 }

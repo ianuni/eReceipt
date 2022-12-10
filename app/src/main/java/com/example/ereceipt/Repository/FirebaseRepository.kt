@@ -26,6 +26,8 @@ interface FirebaseRepository {
 
     suspend fun updateNotifications(nif : String) : ArrayList<Invoice>
 
+    suspend fun updateInvoices(nif : String) : ArrayList<Invoice>
+
     suspend fun acceptNotification(invoiceId : String)
 
     suspend fun declineNotification(invoiceId : String)
