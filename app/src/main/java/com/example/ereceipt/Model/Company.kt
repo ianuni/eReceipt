@@ -2,6 +2,7 @@ package com.example.ereceipt.Model
 
 
 data class Company(
+    var id: String = "",
     var nif: String = "",
     var name: String = "",
     var phoneNumber: String = "",

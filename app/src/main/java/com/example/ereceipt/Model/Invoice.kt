@@ -17,7 +17,7 @@ import java.util.Date
 
 
 class Invoice {
-
+    private var invoiceId : String = ""
     private var buyerNif: String = ""
     private var buyerView: Boolean = true
     private var creationDate: Date = Date()
@@ -117,6 +117,13 @@ class Invoice {
 
     fun setVerificationDate(date: Date){
         this.verificationDate = date
+    }
+
+    fun getInvoiceId() : String{
+        return invoiceId
+    }
+    fun setInvoiceId(id : String){
+        this.invoiceId = id
     }
 
     private fun calculateTotal(productList: List<Product>): Double{

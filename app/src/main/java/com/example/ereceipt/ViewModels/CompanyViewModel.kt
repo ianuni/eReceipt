@@ -8,6 +8,7 @@ import com.example.ereceipt.Model.Invoice
 
 class CompanyViewModel: ViewModel() {
     val company = MutableLiveData<Company>()
+
     val invoices = MutableLiveData<MutableList<Invoice>>()
     //val nonCheckedInvoices = MutableLiveData<MutableList<Invoice>>()
     val nonCheckedInvoices = ArrayList<Invoice>()
@@ -43,7 +44,4 @@ class CompanyViewModel: ViewModel() {
         }
     }*/
 
-    /*fun updateNotifications() : ArrayList<Invoice> {
-
-    }*/
 }
