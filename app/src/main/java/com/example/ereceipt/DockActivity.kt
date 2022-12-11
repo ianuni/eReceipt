@@ -104,7 +104,7 @@ class DockActivity : AppCompatActivity() {
                 val invoices: Collection<Invoice>? = dbViewModel.myFirebase.value?.getInvoices(company!!.nif)
                 if (invoices != null) {
                     companyViewModel.setInvoices(invoices)
-                    updateLocalDatabase()
+                    //updateLocalDatabase()
                 } else Log.e("a", "couldnt load invoices")
             } else Log.e("a", "couldnt load company")
         }
@@ -132,11 +132,11 @@ class DockActivity : AppCompatActivity() {
     }
     private fun pruebaDB(){
         dbViewModel.mySQLite.value?.onUpgrade(dbViewModel.mySQLite.value?.writableDatabase, 1, 1)
-        dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
+        /*dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
         dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
         dbViewModel.mySQLite.value?.addCompany(Company("OTRONIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
         Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompany("NIF").toString())
-        Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompanies().toString())
+        Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompanies().toString())*/
 
     }
 }

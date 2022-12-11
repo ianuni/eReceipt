@@ -126,4 +126,8 @@ class Invoice {
         }
         return total
     }
+
+    private fun getTotalWithTaxes(): Double{
+        return this.total + this.total * this.taxesPercent
+    }
 }
