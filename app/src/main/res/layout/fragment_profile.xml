@@ -5,16 +5,219 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray">
 
-
-    <Button
-        android:id="@+id/log_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/log_out"
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bottom_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.9"/>
+
+    <TextView
+        android:id="@+id/company_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/company_name"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintBottom_toBottomOf="@id/background"
+        app:layout_constraintVertical_bias="0.05"
+        />
+
+    <TextView
+        android:id="@+id/company_nif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_nif"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_name"
+        app:layout_constraintBottom_toTopOf="@id/company_phone"/>
+
+    <TextView
+        android:id="@+id/company_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_phone"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_nif"
+        app:layout_constraintBottom_toTopOf="@id/company_email"/>
+
+    <TextView
+        android:id="@+id/company_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_email"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_phone"
+        app:layout_constraintBottom_toTopOf="@id/company_address"/>
+
+    <TextView
+        android:id="@+id/company_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_address"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_email"
+        app:layout_constraintBottom_toTopOf="@id/company_postalCode"/>
+
+    <TextView
+        android:id="@+id/company_postalCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_postal_code"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_address"
+        app:layout_constraintBottom_toTopOf="@id/company_city"/>
+
+    <TextView
+        android:id="@+id/company_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_city"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_postalCode"
+        app:layout_constraintBottom_toTopOf="@id/company_country"/>
+
+    <TextView
+        android:id="@+id/company_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_country"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@id/company_city"
+        app:layout_constraintBottom_toTopOf="@id/log_out"/>
+
+    <TextView
+        android:id="@+id/company_nif_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_nif"
+        app:layout_constraintStart_toEndOf="@id/company_nif"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_nif"
+        app:layout_constraintBottom_toBottomOf="@id/company_nif"/>
+
+    <TextView
+        android:id="@+id/company_phone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_phone"
+        app:layout_constraintStart_toEndOf="@id/company_phone"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_phone"
+        app:layout_constraintBottom_toBottomOf="@id/company_phone"/>
+
+    <TextView
+        android:id="@+id/company_email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_email"
+        app:layout_constraintStart_toEndOf="@id/company_email"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_email"
+        app:layout_constraintBottom_toBottomOf="@id/company_email"/>
+
+    <TextView
+        android:id="@+id/company_address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_address"
+        app:layout_constraintStart_toEndOf="@id/company_address"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_address"
+        app:layout_constraintBottom_toBottomOf="@id/company_address"/>
+
+    <TextView
+        android:id="@+id/company_postalCode_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_postal_code"
+        app:layout_constraintStart_toEndOf="@id/company_postalCode"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_postalCode"
+        app:layout_constraintBottom_toBottomOf="@id/company_postalCode"/>
+
+    <TextView
+        android:id="@+id/company_city_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_city"
+        app:layout_constraintStart_toEndOf="@id/company_city"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_city"
+        app:layout_constraintBottom_toBottomOf="@id/company_city"/>
+
+    <TextView
+        android:id="@+id/company_country_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/company_country"
+        app:layout_constraintStart_toEndOf="@id/company_country"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintTop_toTopOf="@id/company_country"
+        app:layout_constraintBottom_toBottomOf="@id/company_country"/>
+
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/log_out"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintBottom_toBottomOf="@id/background"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.90"
+        />
+
+    <Button
+        android:id="@+id/edit_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/edit"
+        android:textColor="@color/white"
+        android:background="@drawable/button"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintBottom_toBottomOf="@id/background"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.10"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
