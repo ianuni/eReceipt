@@ -57,4 +57,8 @@ dependencies {
 
     //Para el uso de corrutinas:
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+
+    //Para generar el codigo qr:
+    implementation('com.journeyapps:zxing-android-embedded:4.3.0') { transitive = false }
+    implementation 'com.google.zxing:core:3.3.0'
 }
