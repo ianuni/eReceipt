@@ -15,21 +15,25 @@
         android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <EditText
+        android:id="@+id/EdTxtSearch"
         android:layout_width="305dp"
         android:layout_height="63dp"
         android:hint="search"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/invoicesRecycler"
@@ -41,7 +45,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10"
         app:layout_constraintVertical_bias="0.028"
-        android:background="@drawable/bottom_menu">
+        android:layout_marginTop="10dp"
+        >
 
 
     </androidx.recyclerview.widget.RecyclerView>

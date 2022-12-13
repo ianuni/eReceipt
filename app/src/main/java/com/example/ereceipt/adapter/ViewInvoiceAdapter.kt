@@ -7,7 +7,8 @@ import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.R
 
 class ViewInvoiceAdapter (
-    private val invoiceList:List<Invoice>
+    private var invoiceList:List<Invoice>,
+    private val ifClick:(Invoice) -> Unit
     ) : RecyclerView.Adapter<ViewInvoiceViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewInvoiceViewHolder {
@@ -18,8 +19,13 @@ class ViewInvoiceAdapter (
 
     override fun onBindViewHolder(holder: ViewInvoiceViewHolder, position: Int) {
         val item = invoiceList[position]
-        holder.render(item)
+        holder.render(item, ifClick)
     }
 
     override fun getItemCount(): Int = invoiceList.size
+
+    fun updateInvoices(invoiceList:List<Invoice>) {
+        this.invoiceList = invoiceList
+        notifyDataSetChanged()
+    }
 }
