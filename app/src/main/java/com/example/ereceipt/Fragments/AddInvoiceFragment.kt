@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -105,9 +106,14 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
 
         binding.createBtn.setOnClickListener {
             if (checkNif() == null && checkTaxesPercentage() == null){
-                var invoice = Invoice(binding.buyerNif.text.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
-                lifecycleScope.launch{
-                    databasesViewModel.myFirebase.value?.createInvoice(invoice)
+                if (products.size > 0){
+                    var invoice = Invoice(binding.buyerNif.text.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
+                    lifecycleScope.launch{
+                        databasesViewModel.myFirebase.value?.createInvoice(invoice)
+                    }
+                    emptyForm()
+                }else{
+                    Toast.makeText(activity, "Empty product list", Toast.LENGTH_SHORT).show()
                 }
             }else{
                 invalidForm()
@@ -206,5 +212,12 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
         if (!taxesPercentageValid){
             setTaxesPercentageError()
         }
+    }
+
+    private fun emptyForm(){
+        binding.buyerNif.setText("")
+        binding.taxesPercentage.setText("")
+        products = ArrayList<Product>()
+        initRecyclerView()
     }
 }
