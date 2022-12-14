@@ -56,6 +56,18 @@
         app:layout_constraintVertical_bias="0.95"
         />
 
+    <ImageView
+        android:layout_width="192dp"
+        android:layout_height="256dp"
+        android:background="@drawable/receipt"
+        android:backgroundTint="@color/dark_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/login_button"
+
+        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

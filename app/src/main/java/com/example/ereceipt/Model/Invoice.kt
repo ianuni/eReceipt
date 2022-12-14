@@ -1,6 +1,7 @@
 package com.example.ereceipt.Model
 
 import java.util.Date
+import kotlin.math.roundToInt
 
 /*data class Invoice(
     var buyerNif: String = "",
@@ -131,10 +132,10 @@ class Invoice {
         for (product in productList) {
             total += product.amount * product.price
         }
-        return total
+        return (total * 100.0).roundToInt() / 100.0
     }
 
-    private fun getTotalWithTaxes(): Double{
-        return this.total + this.total * this.taxesPercent
+    fun getTaxBase(): Double {
+        return (total * (1 - taxesPercent / 100) * 100.0).roundToInt() / 100.0
     }
 }

@@ -8,32 +8,45 @@
     tools:context=".Fragments.InvoicesFragment">
 
     <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="375dp"
-        android:layout_height="83dp"
-        android:background="@drawable/button"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        android:id="@+id/search_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bottom_menu"
+        android:backgroundTint="@color/dark_gray"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintWidth_percent="0.95"
+        app:layout_constraintHeight_percent="0.1"/>
+
 
     <EditText
         android:id="@+id/EdTxtSearch"
-        android:layout_width="305dp"
-        android:layout_height="63dp"
-        android:hint="search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/search"
         android:imeOptions="actionDone"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
+        android:textSize="25sp"
+
+        app:layout_constraintBottom_toBottomOf="@id/search_bar"
+        app:layout_constraintEnd_toEndOf="@id/search_bar"
+        app:layout_constraintStart_toEndOf="@id/search_icon"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        app:layout_constraintWidth_percent="0.7"
+        />
+
+    <ImageView
+        android:id="@+id/search_icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/magnifying_glass_solid"
+        app:layout_constraintStart_toStartOf="@id/search_bar"
+        app:layout_constraintEnd_toEndOf="@id/search_bar"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        app:layout_constraintBottom_toBottomOf="@id/search_bar"
+        app:layout_constraintHorizontal_bias="0.1"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/invoicesRecycler"
@@ -41,9 +54,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
         app:layout_constraintVertical_bias="0.028"
         android:layout_marginTop="10dp"
         >

@@ -208,6 +208,31 @@ class FirebaseImplementation constructor(
         return invoices
     }
 
+
+    override suspend fun getCompanies(userNIF: String, invoices : List<Invoice>): Map<String, Company>{
+        val companies = mutableMapOf<String, Company>()
+        var company = getCompany(userNIF)
+        if (company != null){
+            companies[userNIF] = company
+        }
+        for (invoice in invoices){
+            val buyerNif = invoice.getBuyerNif()
+            val sellerNif = invoice.getSellerNif()
+            if (buyerNif == userNIF && !companies.containsKey(buyerNif)){
+                company = getCompany(buyerNif)
+                if (company != null){
+                    companies[buyerNif] = company
+                }
+            }
+            if (sellerNif == userNIF && !companies.containsKey(sellerNif)){
+                company = getCompany(sellerNif)
+                if (company != null){
+                    companies[sellerNif] = company
+                }
+            }
+        }
+        return companies
+    }
     fun getFireAuth() {
         Log.e("awd", this.firebaseAuth.app.toString())
     }

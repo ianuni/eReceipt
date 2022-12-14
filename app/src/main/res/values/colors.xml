@@ -8,7 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#088DEE</color>
+    <color name="analogous">#08ee68</color>
+    <color name = "monochromatic">#3291d5</color>
     <color name="complementary">#ee9208</color>
-    <color name="light_gray">#CBCBCB</color>
+    <color name="light_gray">#E5E5E5</color>
+    <color name="dark_gray">#CBCBCB</color>
     <color name="error">#B80C0C</color>
 </resources>

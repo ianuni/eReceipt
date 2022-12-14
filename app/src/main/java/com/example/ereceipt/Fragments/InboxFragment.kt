@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ereceipt.Model.Company
 import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.Model.Notification
 import com.example.ereceipt.Model.Product
@@ -25,6 +26,7 @@ import kotlinx.coroutines.launch
 class InboxFragment : Fragment(R.layout.fragment_inbox) {
     private lateinit var binding : FragmentInboxBinding
     private var notifications = ArrayList<Invoice>()
+    private var companies = mapOf<String, Company>()
     private lateinit var  adapter : NotificationAdapter
     private val companyViewModel : CompanyViewModel by activityViewModels()
     private val dbViewModel : DatabasesViewModel by activityViewModels()
@@ -39,6 +41,7 @@ class InboxFragment : Fragment(R.layout.fragment_inbox) {
     private fun initRecyclerView(){
         adapter = NotificationAdapter(
             notifications,
+            companies,
             onClickDecline = {position -> declineItem(position)},
             onClickAccept = {position -> acceptItem(position)}
         )
@@ -68,7 +71,10 @@ class InboxFragment : Fragment(R.layout.fragment_inbox) {
         lifecycleScope.launch{
             notifications = dbViewModel.myFirebase.value?.updateNotifications(companyViewModel.company.value!!.nif)!!
             if (notifications.size > 0){
-                initRecyclerView()
+                lifecycleScope.launch{
+                    companies = dbViewModel.myFirebase.value?.getCompanies(companyViewModel.company.value!!.nif, notifications)!!
+                    initRecyclerView()
+                }
             }
         }
     }

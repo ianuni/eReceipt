@@ -33,5 +33,7 @@ interface FirebaseRepository {
     suspend fun declineNotification(invoiceId : String)
 
     suspend fun updateCompany(companyId : String, changes : Map<String, String>)
+
+    suspend fun getCompanies(userId: String, invoices : List<Invoice>) : Map<String, Company>
 }
 
