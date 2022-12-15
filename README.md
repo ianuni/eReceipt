@@ -23,3 +23,7 @@ Group 10 repository
     - [Firebase SDK config](https://www.youtube.com/watch?v=dRYnm_k3w1w&t=13s)
     - [Firebase single instance implementation](https://www.youtube.com/watch?v=YOBJNawutXw&t=3196s&ab_channel=CodeWithEsau)
     - [Functionality](https://firebase.google.com/docs)
+    
+- [Generate QR Code](https://www.youtube.com/watch?v=IZ9TNIzt89w)
+- [QR Code Scanner](https://www.youtube.com/watch?v=Wdb5okugwmU)
+- [Conecting Android Device to Android Studio](https://www.youtube.com/watch?v=eaOB-KS-Qjk)
