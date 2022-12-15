@@ -152,36 +152,7 @@ class DockActivity : AppCompatActivity() {
             } else Log.e("a", "couldnt load company")
             Log.e("a", "cargo los datos")
         }
-
-        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12345678S",true, Date(), mapOf("atun" to 2.33f, "millo" to 1f, "mahonesa" to 23.3f), "4", true, 7f, 50.1f,false, Date()))
-        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12345678S",true, Date(), mapOf("papas" to 2.33f), "4", true, 7f, 50.1f,true, Date()))
-        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12",true, Date(), mapOf("cangrejo" to 2.33f), "12345678S", true, 7f, 50.1f,false, Date()))
-        //fireViewModel.myFirebase.value?.createInvoice(Invoice("12",true, Date(), listOf(Product("chistorra", 4.5, 3)), "12345678S", true, 7.0, 50.1,true, Date()))
     }
 
-    private fun updateLocalDatabase(){
-        lifecycleScope.launch {
-            /*for (invoice in companyViewModel.nonCheckedInvoices.value!!) { //Si te han emitido cualquier factuta
-                var company = dbViewModel.myFirebase.value?.getCompany(invoice.getSellerNif())
-                if (company != null) dbViewModel.mySQLite.value?.addCompany(company)
-            }*/
-            for (invoice in companyViewModel.invoices.value!!) {
-                if (invoice.getSellerNif().equals(companyViewModel.company.value?.nif) && invoice.getVerification()) { //Si eres vendedor y está verificada la factura
-                    var company = dbViewModel.myFirebase.value?.getCompany(invoice.getBuyerNif())
-                    if (company != null) dbViewModel.mySQLite.value?.addCompany(company)
-                }
-            }
-            Log.e("SQLite", "Compañias en la base de datos local: " + dbViewModel.mySQLite.value?.getCompanies().toString())
 
-        }
-    }
-    private fun pruebaDB(){
-        dbViewModel.mySQLite.value?.onUpgrade(dbViewModel.mySQLite.value?.writableDatabase, 1, 1)
-        /*dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
-        dbViewModel.mySQLite.value?.addCompany(Company("NIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
-        dbViewModel.mySQLite.value?.addCompany(Company("OTRONIF", "NAME", "PHONENUMBER", "ADDRESS", "POSTALCODE", "CITY", "COUNTRY", "EMAIL"))
-        Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompany("NIF").toString())
-        Log.e("SQLite", "Se lee la compañia: " + dbViewModel.mySQLite.value?.getCompanies().toString())*/
-
-    }
 }

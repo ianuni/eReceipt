@@ -122,6 +122,21 @@
         app:layout_constraintTop_toBottomOf="@id/space"
         app:layout_constraintWidth_percent="0.9"/>
 
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/error"
+        android:text="@string/delete"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/total_value"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="@id/total_value"
+        app:layout_constraintBottom_toBottomOf="@id/total_value"
+        app:layout_constraintWidth_percent="0.4"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

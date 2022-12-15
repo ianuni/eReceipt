@@ -52,9 +52,12 @@ class InvoicesFragment : Fragment(R.layout.fragment_invoices) {
     }
 
     private fun initRecyclerView() {
-        adapter = ViewInvoiceAdapter(invoices, companies) {
-                invoice -> ifSelected(invoice)
-        }
+        adapter = ViewInvoiceAdapter(
+            invoices,
+            companies,
+            ifClick = {invoice -> ifSelected(invoice)},
+            onClickDelete = {position -> deleteItem(position)})
+
         binding.invoicesRecycler.adapter = adapter
         binding.invoicesRecycler.layoutManager = GridLayoutManager(activity, 2)
     }
@@ -80,6 +83,14 @@ class InvoicesFragment : Fragment(R.layout.fragment_invoices) {
         dialog.show()
         creationView.findViewById<Button>(R.id.btnClose).setOnClickListener {
             dialog.dismiss()
+        }
+    }
+
+    private fun deleteItem(pos : Int){
+        lifecycleScope.launch{
+            dbViewModel.myFirebase.value?.deleteInvoice(companyViewModel.company.value!!.nif, invoices[pos])
+            invoices.removeAt(pos)
+            adapter.notifyItemRemoved(pos)
         }
     }
 

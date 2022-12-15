@@ -42,4 +42,5 @@
     <string name="edit">Edit</string>
     <string name="search">Search</string>
     <string name="scan_qr">Scan QR Code</string>
+    <string name="delete">Delete</string>
 </resources>

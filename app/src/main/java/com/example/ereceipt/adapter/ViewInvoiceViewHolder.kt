@@ -15,7 +15,7 @@ import com.example.ereceipt.databinding.ItemViewInvoiceBinding
 class ViewInvoiceViewHolder(view:View, private val companies: Map<String, Company>): RecyclerView.ViewHolder(view) {
     val binding = ItemInvoiceBinding.bind(view)
 
-    fun render(invoiceModel: Invoice, ifClick:(Invoice) -> Unit){
+    fun render(invoiceModel: Invoice, ifClick:(Invoice) -> Unit, onClickDelete:(Int) -> Unit){
 
         if(companies.containsKey(invoiceModel.getSellerNif())){
             binding.sellerValue.text = companies[invoiceModel.getSellerNif()]!!.name
@@ -54,7 +54,7 @@ class ViewInvoiceViewHolder(view:View, private val companies: Map<String, Compan
         }
         //itemView.setOnClickListener { ifClick(invoiceModel) }
         binding.background.setOnClickListener { ifClick(invoiceModel) }
-
+        binding.deleteBtn.setOnClickListener { onClickDelete(adapterPosition) }
     }
 
 }

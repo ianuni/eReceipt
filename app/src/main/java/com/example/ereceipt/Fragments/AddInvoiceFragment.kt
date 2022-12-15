@@ -3,8 +3,6 @@ package com.example.ereceipt.Fragments
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -113,9 +111,14 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
 
         binding.createBtn.setOnClickListener {
             if (checkNif() == null && checkTaxesPercentage() == null){
-                var invoice = Invoice(binding.buyerNif.text.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
-                lifecycleScope.launch{
-                    databasesViewModel.myFirebase.value?.createInvoice(invoice)
+                if (products.size > 0){
+                    var invoice = Invoice(binding.buyerNif.text.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
+                    lifecycleScope.launch{
+                        databasesViewModel.myFirebase.value?.createInvoice(invoice)
+                    }
+                    emptyForm()
+                }else{
+                    Toast.makeText(activity, "Empty product list", Toast.LENGTH_SHORT).show()
                 }
             }else{
                 invalidForm()
@@ -217,9 +220,6 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
     }
 
     private fun initScanner() {
-        //IntentIntegrator(activity).initiateScan()
-        //IntentIntegrator.forSupportFragment(this).initiateScan()
-        //val integrator = IntentIntegrator(activity)
         val integrator = IntentIntegrator.forSupportFragment(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
         integrator.setPrompt("Escanee el codigo QR para obtener el NIF del comprador.")
@@ -231,34 +231,54 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result: IntentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        val result: IntentResult =
+            IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
                 Toast.makeText(activity, "No se ha podido escanear.", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                //Toast.makeText(activity, "escanea bien, el valor es: ${result.contents}", Toast.LENGTH_SHORT).show()
+            } else {
                 if (binding.buyerNif.text.toString() == "") {
-                    if (checkTaxesPercentage() == null){
-                        var invoice = Invoice(result.contents.toString(), companyViewModel.company.value!!.nif, products, binding.taxesPercentage.text.toString().toDouble())
+                    if (checkTaxesPercentage() == null) {
+                        var invoice = Invoice(
+                            result.contents.toString(),
+                            companyViewModel.company.value!!.nif,
+                            products,
+                            binding.taxesPercentage.text.toString().toDouble()
+                        )
                         invoice.setVerification(true)
-                        lifecycleScope.launch{
+                        lifecycleScope.launch {
                             databasesViewModel.myFirebase.value?.createInvoice(invoice)
                         }
-                        Toast.makeText(activity, "Se ha creado la factura para la empresa con NIF: ${result.contents}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            activity,
+                            "Se ha creado la factura para la empresa con NIF: ${result.contents}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        emptyForm()
+                    } else {
+                        Toast.makeText(
+                            activity,
+                            "Debe introducir un impuesto correcto.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    else{
-                        Toast.makeText(activity, "Debe introducir un impuesto correcto.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                else{
-                    Toast.makeText(activity, "Debe dejar el campo de NIF vacio.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        activity,
+                        "Debe dejar el campo de NIF vacio.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
 
+    private fun emptyForm(){
+        binding.buyerNif.setText("")
+        binding.taxesPercentage.setText("")
+        products.clear()
+        initRecyclerView()
     }
 }

@@ -18,8 +18,6 @@ interface FirebaseRepository {
 
     suspend fun getCompany(nif: String): Company?
 
-    //suspend fun getCheckedInvoices(nif: String): MutableCollection<Invoice>
-
     suspend fun getInvoices(nif: String): Collection<Invoice>
 
     suspend fun createInvoice(invoice: Invoice): Boolean
@@ -35,5 +33,7 @@ interface FirebaseRepository {
     suspend fun updateCompany(companyId : String, changes : Map<String, String>)
 
     suspend fun getCompanies(userId: String, invoices : List<Invoice>) : Map<String, Company>
+
+    suspend fun deleteInvoice(userId: String, invoice : Invoice)
 }
 
