@@ -131,4 +131,18 @@
         app:layout_constraintVertical_bias="0.2"
         />
 
+    <Button
+        android:id="@+id/scanQR"
+        android:layout_width="119dp"
+        android:layout_height="33dp"
+        android:background="@drawable/button"
+        android:text="@string/scan_qr"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/form_bottom_division"
+        app:layout_constraintEnd_toEndOf="@id/right_bound"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/left_bound"
+        app:layout_constraintTop_toBottomOf="@+id/create_btn"
+        app:layout_constraintVertical_bias="0.327" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

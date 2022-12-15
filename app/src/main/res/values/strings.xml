@@ -41,4 +41,5 @@
     <string name="company_country">Country: </string>
     <string name="edit">Edit</string>
     <string name="search">Search</string>
+    <string name="scan_qr">Scan QR Code</string>
 </resources>

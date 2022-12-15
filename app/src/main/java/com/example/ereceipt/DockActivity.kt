@@ -1,9 +1,13 @@
 package com.example.ereceipt
 
+import android.app.AlertDialog
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +21,8 @@ import com.example.ereceipt.Model.Company
 import com.example.ereceipt.Model.Invoice
 import com.example.ereceipt.ViewModels.CompanyViewModel
 import com.example.ereceipt.ViewModels.DatabasesViewModel
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.coroutines.launch
 
 
@@ -26,6 +32,7 @@ class DockActivity : AppCompatActivity() {
     private lateinit var inbox: ImageButton
     private lateinit var profile: ImageButton
     private lateinit var currentBtn :ImageButton
+    private lateinit var qr :ImageView
     private val dbViewModel : DatabasesViewModel by viewModels()
     private val companyViewModel : CompanyViewModel by viewModels()
 
@@ -37,6 +44,7 @@ class DockActivity : AppCompatActivity() {
         dbViewModel.setSQLite(SQLite(this))
         loadDataOnViewModels()
 
+        qr = findViewById(R.id.qr)
         invoices = findViewById(R.id.invoices)
         addInvoice = findViewById(R.id.add_invoice)
         inbox = findViewById(R.id.inbox)
@@ -64,6 +72,31 @@ class DockActivity : AppCompatActivity() {
         addInvoice.isClickable = false
         inbox.isClickable = false
         profile.isClickable = false
+
+        qr.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val creationView = layoutInflater.inflate(R.layout.dialog_qr, null)
+            builder.setView(creationView)
+            val dialog = builder.create()
+            setDialogData(creationView)
+            dialog.show()
+        }
+
+    }
+
+    private fun setDialogData(creationView: View) {
+        try {
+            var barcodeEncoder = BarcodeEncoder()
+            var bitmap: Bitmap = barcodeEncoder.encodeBitmap(
+                companyViewModel.company.value?.nif.toString(),
+                BarcodeFormat.QR_CODE,
+                300,
+                300
+            )
+            creationView.findViewById<ImageView>(R.id.QRCodeImageView).setImageBitmap(bitmap)
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
     }
 
     override fun onBackPressed() {
