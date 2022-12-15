@@ -246,6 +246,8 @@ class AddInvoiceFragment : Fragment(R.layout.fragment_add_invoice) {
                             binding.taxesPercentage.text.toString().toDouble()
                         )
                         invoice.setVerification(true)
+                        invoice.setSellerView(true)
+                        invoice.setBuyerView(true)
                         lifecycleScope.launch {
                             databasesViewModel.myFirebase.value?.createInvoice(invoice)
                         }
